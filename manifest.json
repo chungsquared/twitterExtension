@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "Twitter Extension",
+
+  "description": "Allows users to easily post content onto their twitter accounts",
+
+  "version": "1.0",
+
+  "icons":{
+    "64": "naruto.png"
+  },
+
+  "background":{
+    "scripts":["background.js"],
+    "persistent" : false
+    //persistant false switches the extension to an inactive state when it is not in use. this is important to improve speed by reducing memory usage
+  },
+
+}
+
+
+
+
+
