@@ -19,25 +19,26 @@ for(var i = 0;i<contextsList.length;i++){
 	chrome.contextMenus.create({
 		title: titleX,
 		contexts: [context],
-		onclick: myFunction,
+		onclick: clickHandler,
 		id: context,
 	});
 }
 
-function myFunction(data){
+function clickHandler(data,tab){
 	switch(data.menuItemId){
 		case "selection": 
-			chrome.tabs.create({url: "https://twitter.com/intent/tweet?text=" + data.selectionText});
+			chrome.windows.create({url: "https://twitter.com/intent/tweet?text=" + encodeURIComponent(data.selectionText), type:"panel" });
 			break;
 		case "link":
-			chrome.tabs.create({url: "https://twitter.com/intent/tweet?url=" + data.linkUrl});
+			chrome.windows.create({url: "https://twitter.com/intent/tweet?url=" + encodeURIComponent(data.linkUrl), type:"panel"});
 			break;
 		case "image":
-			chrome.tabs.create({url: "https://twitter.com/intent/tweet?url=" + data.srcUrl});
+			chrome.windows.create({url: "https://twitter.com/intent/tweet?url=" + encodeURIComponent(data.srcUrl), type:"panel"});
 			break;
 		case "page":
-			chrome.tabs.create({url: "https://twitter.com/intent/tweet?text=myPage"});
+			chrome.windows.create({url: "https://twitter.com/intent/tweet?text=" +
+				encodeURIComponent(tab.title)+"&url="+(data.pageUrl), type:"panel"});
 			break;
-
 	}
 }
+
